@@ -5,16 +5,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class Services {
+public class ServicesPage {
 
 
     private WebDriver driver = Driver.getDriver();
-    private static final Logger log = LogManager.getLogger(Services.class);
+    private static final Logger log = LogManager.getLogger(ServicesPage.class);
 
-    public Services() {
+    public ServicesPage() {
         PageFactory.initElements(driver, this);
     }
 

@@ -15,6 +15,7 @@ public class ReusableMethods {
 
     // CLICK METHODS------------------------------------------------------------------------------------------------------
     public static void clickElement(By by) {
+        waitForSeconds(1);
         Driver.getDriver().findElement(by).click();
     }
 
@@ -30,6 +31,7 @@ public class ReusableMethods {
     // SENDKEYS METHODS------------------------------------------------------------------------------------------------------
     public static void sendKeys(By by, String data) {
         Driver.getDriver().findElement(by).sendKeys(data);
+        waitForSeconds(1);
     }
 
     // ISDISPLAYED / ISVISIBLE  METHODS------------------------------------------------------------------------------------------------------

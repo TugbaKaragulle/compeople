@@ -8,26 +8,28 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class Homepage {
+public class HomePage {
 
     private WebDriver driver = Driver.getDriver();
-    private static final Logger log = LogManager.getLogger(Homepage.class);
+    private static final Logger log = LogManager.getLogger(HomePage.class);
 
-    public Homepage() {
+    public HomePage() {
         PageFactory.initElements(driver, this);
     }
 
-    //Elemente
+    //Elements
 
     private By services = By.xpath("//ul[contains(@id, 'menu-1')]//a[text()='Services']");
     private By News = By.xpath("//ul[contains(@id, 'menu-1')]//a[text()='News']");
     private By Karriere = By.xpath("//ul[contains(@id, 'menu-1')]//a[text()='Karriere']");
     private By uberUns = By.xpath("//ul[contains(@id, 'menu-1')]//a[text()='Über uns']");
 
-    //Methode
+    //Methods
 
-    public void clickKarriere(){
-        ReusableMethods.clickElement(Karriere);
+    public void clickHeaderMenu(String menuName) {
+        By dinamikHeaderMenu = By.xpath("//ul[contains(@id, 'menu-1')]//a[normalize-space()='" + menuName + "']");
+        ReusableMethods.waitForElementToBeClickable(driver, dinamikHeaderMenu, 10);
+        ReusableMethods.clickElement(dinamikHeaderMenu);
     }
 
 

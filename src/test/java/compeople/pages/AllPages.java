@@ -2,28 +2,36 @@ package compeople.pages;
 
 public class AllPages {
 
-    private Homepage homepage;
-    private Services services;
-    private Karriere karriere;
+    private HomePage homepage;
+    private ServicesPage services;
+    private KarrierePage karriere;
+    private BewerbungsFormularPage bewerbungsFormularPage;
 
-    public Homepage getHomepage() {
+    public HomePage getHomepage() {
         if (homepage == null) {
-            homepage = new Homepage();
+            homepage = new HomePage();
         }
         return homepage;
     }
 
-    public Services getServices() {
+    public ServicesPage getServices() {
         if (services == null){
-            services = new Services();
+            services = new ServicesPage();
         }
         return services;
     }
 
-    public Karriere getKarriere(){
+    public KarrierePage getKarriere(){
         if(karriere==null){
-            karriere = new Karriere();
+            karriere = new KarrierePage();
         }
         return karriere;
+    }
+
+    public BewerbungsFormularPage getBewerbungsFormularPage() {
+        if (bewerbungsFormularPage == null){
+            bewerbungsFormularPage = new BewerbungsFormularPage();
+        }
+        return bewerbungsFormularPage;
     }
 }

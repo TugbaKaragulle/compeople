@@ -64,6 +64,7 @@ public class JavascriptUtils {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+        ReusableMethods.waitForSeconds(1);
     }
 
     // Kann als sicherer Fallback verwendet werden, wenn Actions.moveToElement() im Headless-Modus oder bei Hover-Problemen nicht funktioniert.
