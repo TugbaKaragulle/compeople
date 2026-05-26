@@ -101,17 +101,17 @@ public class KarrierePage {
     public void selectFilteredPosition(String position) {
         List<WebElement>jobs = new ArrayList<>(driver.findElements(filteredPositions));
         for (int i = 0; i < jobs.size(); i++) {
-            String jobName = jobs.get(i).getText();
+            String jobName = ReusableMethods.getTextOfElement(jobs.get(i));
             if(jobName.contains(position)){
                 jobs.get(i).click();
                 break;
             }
             ReusableMethods.waitForSeconds(2);
-
         }
     }
 
     public void clickJetztBewerben(){
+        //JavascriptUtils.seiteLangsamNachUntenScrollen(driver,18);
         ReusableMethods.waitForElementToBeClickable(driver, jetztBewerben, 10);
         ReusableMethods.clickElement(jetztBewerben);
     }

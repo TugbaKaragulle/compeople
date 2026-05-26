@@ -1,17 +1,21 @@
 package compeople.utilities;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 
 import static compeople.utilities.Driver.getDriver;
 
 public class ReusableMethods {
+    private static final Logger log = LogManager.getLogger(ReusableMethods.class);
 
     // CLICK METHODS------------------------------------------------------------------------------------------------------
     public static void clickElement(By by) {
@@ -85,8 +89,8 @@ public class ReusableMethods {
     }
 
     //GET TEXT OF ELEMENT     * Returns trimmed text of a WebElement.
-    public static String getTextOfElement(By by) {
-        return Driver.getDriver().findElement(by).getText().trim();
+    public static String getTextOfElement(WebElement element) {
+        return element.getText().trim();
     }
 
     public static String getTextOfElementByJS(By by) {
@@ -149,6 +153,11 @@ public class ReusableMethods {
         return wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
+    public static WebElement waitForElementToBePrecense(WebDriver driver, By by, int timeoutSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
 
     public static void waitForUrlToChange(String oldUrl) {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
@@ -160,7 +169,19 @@ public class ReusableMethods {
             throw e;
         }
     }
-
-
+    public static void uploadDatei(WebDriver driver, By locator, String fileName) {
+        try {
+            JavascriptUtils.changeBackgroundColorByJS(locator,"yellow");
+            String filePath = System.getProperty("user.dir") + File.separator + fileName;
+            WebElement fileInput = waitForElementToBePrecense(driver, locator, 10);
+            fileInput.sendKeys(filePath);
+            log.info("Das Dokument '" + fileName + "' wurde erfolgreich hochgeladen.");
+        } catch (Exception e) {
+            log.error("Fehler beim Hochladen des Dokuments '" + fileName + "': ", e);
+        }
+    }
 }
+
+
+
 

@@ -13,6 +13,4 @@ public class HomepageSD {
         allPages.getHomepage().clickHeaderMenu(menuName);
     }
 
-
-
 }

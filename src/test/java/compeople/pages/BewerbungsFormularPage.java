@@ -11,6 +11,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,16 +34,19 @@ public class BewerbungsFormularPage {
     private By plz = By.xpath("//input[@id='plz']");
     private By ort = By.xpath("//input[@id='ort']");
     private By land = By.xpath("//span[@id='country-button']");
-    private By allLand = By.xpath("//li[@class='ui-menu-item']");
+    private By landAntworten = By.xpath("//li[@class='ui-menu-item']");
     private By geburtsDatum = By.xpath("//input[@id='geburtsdatum']");
     private By telefon = By.xpath("//input[@id='telefon']");
     private By mail = By.xpath("//input[@id='mail']");
     private By eintritt = By.xpath("//input[@id='eintrittsdatum']");
     private By gehaltswunsch = By.xpath("//input[@id='gehaltswunsch']");
     private By wieGefunden = By.xpath("//span[@id='wie_gefunden-button']");
-    private By whatsapp = By.xpath("//span[@id='whatsapp_opt-button']");
-    private By anschreiben = By.xpath("//input[@id='fld_6a145a035ed69748431930']");
-    private By datenschut = By.xpath("//input[@id='fld_6a145a035ed69748431930']");
+    private By wieGefundenAntworten = By.xpath("//li[@class='ui-menu-item']//div");
+    private By whatsApp = By.xpath("//span[@id='whatsapp_opt-button']");
+    private By whatsappAntworten = By.xpath("//ul[@id='whatsapp_opt-menu']/li");
+    private By anschreibenInput = By.xpath("//input[@name='anschreiben']");
+    private By lebenslaufInput = By.xpath("//input[@name='lebenslauf']");
+    private By datenschutz = By.xpath("//i[@class='rexx fa']");
     private By jetztBewerben = By.xpath("//div[@id='btn_online_application_send']");
 
 
@@ -75,9 +79,9 @@ public class BewerbungsFormularPage {
         JavascriptUtils.changeBackgroundColorByJS(ort,"yellow");
         ReusableMethods.waitForElementToBeClickable(driver, land, 10);
        ReusableMethods.clickElement(land);
-        List<WebElement>allCountry = new ArrayList<>(driver.findElements(allLand));
+        List<WebElement>allCountry = new ArrayList<>(driver.findElements(landAntworten));
         for(int i =0; i<allCountry.size(); i++){
-            String countryName = allCountry.get(i).getText();
+            String countryName = ReusableMethods.getTextOfElement(allCountry.get(i));
             if (countryName.equals(country)){
                 allCountry.get(i).click();
                 break;
@@ -107,15 +111,35 @@ public class BewerbungsFormularPage {
         driver.findElement(eintritt).sendKeys(Keys.ESCAPE);
         log.info("Eintrittsdatum eingegeben.");
     }
-
     public void enterGehaltswunsch(){
         JavascriptUtils.changeBackgroundColorByJS(gehaltswunsch,"yellow");
         ReusableMethods.sendKeys(gehaltswunsch, "40000");
         log.info("Gehaltswunsch eingegeben.");
     }
+    public void selectWieGefunden(String website){
+        JavascriptUtils.changeBackgroundColorByJS(wieGefunden,"yellow");
+        By webOption = By.xpath("//ul[@id='wie_gefunden-menu']//li[normalize-space()='" + website + "']");
+        ReusableMethods.waitForElementToBeClickable(driver,wieGefunden , 10);
+        ReusableMethods.clickElement(wieGefunden);
+        ReusableMethods.clickElement(webOption);
+        log.info("Wie gefunden gewählt.");
+    }
 
+    public void selectWhatsappAnswer(String yesOrNo){
+        JavascriptUtils.changeBackgroundColorByJS(whatsApp,"yellow");
+        By whatsAppOption = By.xpath("//ul[@id='whatsapp_opt-menu']/li[normalize-space()='" + yesOrNo + "']");
+        ReusableMethods.waitForElementToBeClickable(driver, whatsApp,10);
+        ReusableMethods.clickElement(whatsApp);
+        ReusableMethods.clickElement(whatsAppOption);
+        log.info("WhatsApp info eingegeben.");
+    }
 
-
+    public void clickDatenschutz(){
+        JavascriptUtils.changeBackgroundColorByJS(datenschutz,"yellow");
+        ReusableMethods.waitForElementToBeClickable(driver,datenschutz,10);
+        ReusableMethods.clickElement(datenschutz);
+        log.info("Datenschutz wurde akzeptiert ");
+    }
 
     public void fillForm() {
         enterVorname();
@@ -129,7 +153,22 @@ public class BewerbungsFormularPage {
         enterMail();
         enterEintritt();
         enterGehaltswunsch();
+        selectWieGefunden("andere Jobbörse");
+        selectWhatsappAnswer("Nein");
+        ReusableMethods.uploadDatei(driver,anschreibenInput,"Anschreiben_Test.docx");
+        ReusableMethods.uploadDatei(driver,lebenslaufInput,"Lebenslauf_Test.docx");
+        clickDatenschutz();
+    }
 
+    public boolean ifJetztBewerbenButtonClickable(){
+        try {
+            ReusableMethods.isClickableByWebDriverWait(jetztBewerben);
+            log.info("Der 'Jetzt bewerben'-Button ist klickbar.");
+            return true;
+        } catch (Exception e) {
+            log.warn("Der 'Jetzt bewerben'-Button ist momentan nicht klickbar veya wurde nicht gefunden.");
+            return false;
+        }
     }
 
 
