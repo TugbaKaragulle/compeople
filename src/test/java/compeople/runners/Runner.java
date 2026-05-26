@@ -11,7 +11,6 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {
                 "html:target/reports/html_report.html",
                 "rerun:target/failed_tests/failed_scenarios.txt",
-                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "pretty"},
         publish = true,
         dryRun = false

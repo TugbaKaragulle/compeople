@@ -1,6 +1,7 @@
 package compeople.stepDefinitions;
 
 import compeople.pages.AllPages;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -15,7 +16,7 @@ public class BewerbungsFormulaSD {
     allPages.getBewerbungsFormularPage().fillForm("10.10.1990");
     }
 
-    @Then("prüft, ob die Schaltfläche zum Absenden klickbar ist")
+    @Then("wird prüft, ob die Schaltfläche zum Absenden klickbar ist")
     public void prüft_ob_die_schaltfläche_zum_absenden_klickbar_ist() {
         Assert.assertTrue(allPages.getBewerbungsFormularPage().ifJetztBewerbenButtonClickable());
     }
@@ -25,12 +26,12 @@ public class BewerbungsFormulaSD {
         allPages.getBewerbungsFormularPage().fillFormWithInvalidBirthDate();
     }
 
-    @When("klickt auf die Schaltfläche zum Absenden")
+    @And("klickt auf die Schaltfläche zum Absenden")
     public void klickt_auf_die_schaltfläche_zum_absenden() {
         allPages.getBewerbungsFormularPage().clickJetztBewerbenButton();
     }
 
-    @Then("prüft, ob die Fehlermeldung {string} beinhaltet")
+    @Then("wird prüft, ob die Fehlermeldung {string} beinhaltet")
     public void sollte_die_fehlermeldung_angezeigt_werden(String errMsg) {
         Assert.assertTrue(allPages.getBewerbungsFormularPage().invalidBirthDateFormat(errMsg));
     }

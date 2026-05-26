@@ -5,7 +5,7 @@ Feature: Bewerbung über die Homepage von compeople
     Given Der Benutzer geht zur Startseite
 
   @Bewerbung @E2E
-  Scenario: Job suchen und Bewerbung starten
+  Scenario: Erfolgreich nach einer Stelle suchen und den Bewerbungsprozess starten
     When Der Benutzer klickt auf "Karriere" im Header
     And klickt auf der geöffneten Seite auf "Offene Stellen"
     And klickt auf "Ja, ich bin einverstanden" im Cookie-Banner
@@ -16,11 +16,11 @@ Feature: Bewerbung über die Homepage von compeople
     And klickt auf das Stellenangebot, das das Wort "Testing" beinhaltet
     And startet den Bewerbungsprozess über die Schaltfläche Jetzt bewerben
     And füllt das Bewerbungsformular aus
-    Then prüft, ob die Schaltfläche zum Absenden klickbar ist
+    Then wird prüft, ob die Schaltfläche zum Absenden klickbar ist
 
 
   @Bewerbung @Negative
-  Scenario: Job suchen und Bewerbung starten
+  Scenario: Fehlermeldung bei ungültigem Geburtsdatum anzeigen
     When Der Benutzer klickt auf "Karriere" im Header
     And klickt auf der geöffneten Seite auf "Offene Stellen"
     And klickt auf "Ja, ich bin einverstanden" im Cookie-Banner
@@ -32,4 +32,4 @@ Feature: Bewerbung über die Homepage von compeople
     And startet den Bewerbungsprozess über die Schaltfläche Jetzt bewerben
     And füllt das Bewerbungsformular aus und gibt im Pflichtfeld Geburtsdatum im falschen Format ein
     And klickt auf die Schaltfläche zum Absenden
-    Then prüft, ob die Fehlermeldung "Geburtsdatum: Ungültiges Datum" beinhaltet
+    Then wird prüft, ob die Fehlermeldung "Geburtsdatum: Ungültiges Datum" beinhaltet

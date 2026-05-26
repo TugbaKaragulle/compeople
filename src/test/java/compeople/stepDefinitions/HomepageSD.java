@@ -12,5 +12,4 @@ public class HomepageSD {
     public void der_benutzer_klickt_auf_im_header(String menuName) {
         allPages.getHomepage().clickHeaderMenu(menuName);
     }
-
 }

@@ -1,6 +1,5 @@
 package compeople.stepDefinitions;
 
-import compeople.pages.AllPages;
 import compeople.utilities.ConfigReader;
 import compeople.utilities.Driver;
 import compeople.utilities.ReusableMethods;
