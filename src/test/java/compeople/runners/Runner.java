@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "compeople.stepDefinitions",
-        tags = "@Bewerbung",
+        tags = "@E2E",
         plugin = {
                 "html:target/reports/html_report.html",
                 "rerun:target/failed_tests/failed_scenarios.txt",

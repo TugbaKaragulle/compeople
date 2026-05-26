@@ -44,7 +44,7 @@ public class KarriereSD {
         allPages.getKarriere().selectFilteredPosition(position);
     }
 
-    @When("Startet den Bewerbungsprozess über die Schaltfläche Jetzt bewerben")
+    @When("startet den Bewerbungsprozess über die Schaltfläche Jetzt bewerben")
     public void startet_den_bewerbungsprozess_über_die_schaltfläche_jetzt_bewerben() {
         allPages.getKarriere().clickJetztBewerben();
     }

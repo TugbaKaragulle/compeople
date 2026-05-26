@@ -9,24 +9,16 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class BewerbungsFormularPage {
-    private WebDriver driver = Driver.getDriver();
 
-    public BewerbungsFormularPage(){
-        PageFactory.initElements(driver,this);
-    }
+    private WebDriver driver = Driver.getDriver();
     private static final Logger log = LogManager.getLogger(BewerbungsFormularPage.class);
     private Faker faker = new Faker(new Locale("de"));
 
-    //Elements
+    // ---------------- LOCATORS ----------------
 
     private By vorname = By.xpath("//input[@id='vorname']");
     private By nachname = By.xpath("//input[@id='nachname']");
@@ -48,73 +40,69 @@ public class BewerbungsFormularPage {
     private By lebenslaufInput = By.xpath("//input[@name='lebenslauf']");
     private By datenschutz = By.xpath("//i[@class='rexx fa']");
     private By jetztBewerben = By.xpath("//div[@id='btn_online_application_send']");
+    private By topErrorMessage = By.xpath("//div[@id='group_error_4567']/p[1]");
 
+    // ---------------- METHODS ----------------
 
     public void enterVorname(){
         JavascriptUtils.changeBackgroundColorByJS(vorname,"yellow");
         ReusableMethods.sendKeys(vorname, faker.name().firstName());
-        log.info("Vorname eingegeben.");
+        log.info("Vorname wurde erfolgreich eingegeben.");
     }
     public void enterNachname(){
         JavascriptUtils.changeBackgroundColorByJS(nachname,"yellow");
         ReusableMethods.sendKeys(nachname, faker.name().lastName());
-        log.info("Nachname eingegeben.");
+        log.info("Nachname wurde erfolgreich eingegeben.");
     }
     public void enterStraße(){
         JavascriptUtils.changeBackgroundColorByJS(straße,"yellow");
         ReusableMethods.sendKeys(straße,faker.address().streetName());
-        log.info("Straße eingegeben.");
+        log.info("Straße wurde erfolgreich eingegeben.");
     }
     public void enterPlz(){
         JavascriptUtils.changeBackgroundColorByJS(plz,"yellow");
         ReusableMethods.sendKeys(plz, faker.address().zipCode());
-        log.info("Postleitzahl eingegeben.");
+        log.info("Postleitzahl wurde erfolgreich eingegeben.");
     }
     public void enterOrt(){
         JavascriptUtils.changeBackgroundColorByJS(ort,"yellow");
         ReusableMethods.sendKeys(ort, faker.address().cityName());
-        log.info("Ort eingegeben.");
+        log.info("Ort wurde erfolgreich eingegeben.");
     }
     public void selectLand(String country){
-        JavascriptUtils.changeBackgroundColorByJS(ort,"yellow");
+        JavascriptUtils.changeBackgroundColorByJS(land,"yellow");
+        By countryOption = By.xpath("//ul[@id='country-menu']//li[normalize-space()='" + country + "']");
         ReusableMethods.waitForElementToBeClickable(driver, land, 10);
-       ReusableMethods.clickElement(land);
-        List<WebElement>allCountry = new ArrayList<>(driver.findElements(landAntworten));
-        for(int i =0; i<allCountry.size(); i++){
-            String countryName = ReusableMethods.getTextOfElement(allCountry.get(i));
-            if (countryName.equals(country)){
-                allCountry.get(i).click();
-                break;
-            }
-        }
-        log.info("Eine Land gewählt");
+        ReusableMethods.clickElement(land);
+        ReusableMethods.clickElement(countryOption);
+        log.info("Land wurde ausgewählt: " + country);
     }
-    public void enterGeburtsdatum(){
+    public void enterGeburtsdatum(String datum){
         JavascriptUtils.changeBackgroundColorByJS(geburtsDatum,"yellow");
-        ReusableMethods.sendKeys(geburtsDatum, "10.10.1990");
+        ReusableMethods.sendKeys(geburtsDatum, datum);
         driver.findElement(geburtsDatum).sendKeys(Keys.ESCAPE);
-        log.info("Geburtsdatum eingegeben.");
+        log.info("Geburtsdatum wurde eingegeben:" + datum);
     }
     public void enterTelefon(){
         JavascriptUtils.changeBackgroundColorByJS(telefon,"yellow");
         ReusableMethods.sendKeys(telefon, faker.phoneNumber().cellPhone());
-        log.info("Telefonnummer eingegeben.");
+        log.info("Telefonnummer wurde erfolgreich eingegeben.");
     }
     public void enterMail(){
         JavascriptUtils.changeBackgroundColorByJS(mail,"yellow");
         ReusableMethods.sendKeys(mail, faker.internet().emailAddress());
-        log.info("E-mail eingegeben.");
+        log.info("E-Mail-Adresse wurde erfolgreich eingegeben.");
     }
     public void enterEintritt(){
         JavascriptUtils.changeBackgroundColorByJS(eintritt,"yellow");
         ReusableMethods.sendKeys(eintritt, "01.07.2026");
         driver.findElement(eintritt).sendKeys(Keys.ESCAPE);
-        log.info("Eintrittsdatum eingegeben.");
+        log.info("Eintrittsdatum wurde eingegeben.");
     }
     public void enterGehaltswunsch(){
         JavascriptUtils.changeBackgroundColorByJS(gehaltswunsch,"yellow");
         ReusableMethods.sendKeys(gehaltswunsch, "40000");
-        log.info("Gehaltswunsch eingegeben.");
+        log.info("Gehaltswunsch wurde eingegeben.");
     }
     public void selectWieGefunden(String website){
         JavascriptUtils.changeBackgroundColorByJS(wieGefunden,"yellow");
@@ -122,7 +110,7 @@ public class BewerbungsFormularPage {
         ReusableMethods.waitForElementToBeClickable(driver,wieGefunden , 10);
         ReusableMethods.clickElement(wieGefunden);
         ReusableMethods.clickElement(webOption);
-        log.info("Wie gefunden gewählt.");
+        log.info("Quelle 'Wie gefunden' wurde ausgewählt: {}", website);
     }
 
     public void selectWhatsappAnswer(String yesOrNo){
@@ -131,24 +119,24 @@ public class BewerbungsFormularPage {
         ReusableMethods.waitForElementToBeClickable(driver, whatsApp,10);
         ReusableMethods.clickElement(whatsApp);
         ReusableMethods.clickElement(whatsAppOption);
-        log.info("WhatsApp info eingegeben.");
+        log.info("WhatsApp-Option wurde beantwortet:{}", yesOrNo);
     }
 
     public void clickDatenschutz(){
         JavascriptUtils.changeBackgroundColorByJS(datenschutz,"yellow");
         ReusableMethods.waitForElementToBeClickable(driver,datenschutz,10);
         ReusableMethods.clickElement(datenschutz);
-        log.info("Datenschutz wurde akzeptiert ");
+        log.info("Datenschutzrichtlinien wurden akzeptiert.");
     }
 
-    public void fillForm() {
+    public void fillForm(String geburtsDatum) {
         enterVorname();
         enterNachname();
         enterStraße();
         enterPlz();
         enterOrt();
         selectLand("Deutschland");
-        enterGeburtsdatum();
+        enterGeburtsdatum(geburtsDatum);
         enterTelefon();
         enterMail();
         enterEintritt();
@@ -158,7 +146,21 @@ public class BewerbungsFormularPage {
         ReusableMethods.uploadDatei(driver,anschreibenInput,"Anschreiben_Test.docx");
         ReusableMethods.uploadDatei(driver,lebenslaufInput,"Lebenslauf_Test.docx");
         clickDatenschutz();
+        log.info("Das Bewerbungsformular wurde mit gültigen Daten ausgefüllt.");
     }
+
+    public void fillFormWithInvalidBirthDate(){
+        fillForm("1990.10.10");
+        log.info("Das Bewerbungsformular wurde mit einem ungültigen Geburtsdatumsformat ausgefüllt.");
+    }
+
+    public void clickJetztBewerbenButton(){
+        ReusableMethods.waitForElementToBeClickable(driver,jetztBewerben,10);
+        ReusableMethods.clickElement(jetztBewerben);
+        log.info("Auf den 'Jetzt bewerben' Button wurde geklickt.");
+    }
+
+    // ---------------- VALIDATIONS ----------------
 
     public boolean ifJetztBewerbenButtonClickable(){
         try {
@@ -170,6 +172,24 @@ public class BewerbungsFormularPage {
             return false;
         }
     }
+
+    public boolean invalidBirthDateFormat(String expectedMsg) {
+        try {
+        ReusableMethods.waitForVisibility(driver, topErrorMessage,10);
+        String actualMsg = driver.findElement(topErrorMessage).getText();
+        log.info("Gefundener Text im Fehlerblock: '{}' | Erwarteter Teil: '{}'", actualMsg, expectedMsg);
+        return actualMsg.contains(expectedMsg);
+    } catch (Exception e) {
+            log.warn("Fehlerblock konnte nicht gefunden werden oder ist leer: {}", topErrorMessage);
+        return false;
+    }
+}
+
+
+
+
+
+
 
 
 }

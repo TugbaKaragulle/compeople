@@ -180,7 +180,15 @@ public class ReusableMethods {
             log.error("Fehler beim Hochladen des Dokuments '" + fileName + "': ", e);
         }
     }
-}
+
+
+    public static WebElement waitForVisibility(WebDriver driver, By locator, int timeoutInSeconds) {
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        }
+    }
+
 
 
 
