@@ -7,11 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class KarrierePage {
 
@@ -21,7 +17,6 @@ public class KarrierePage {
 
     // ---------------- LOCATORS ----------------
 
-    private By karriere = By.xpath("(//a[@class='elementor-item'][normalize-space()='Karriere'])[1]");
     private By jetztBewerben = By.xpath("//a[text()='Jetzt bewerben!']");
     private By unternehmensBereich = By.xpath("//span[normalize-space()='Unternehmensbereich']");
     private By karrierelevel = By.xpath("//span[normalize-space()='Karrierelevel']");
@@ -37,7 +32,6 @@ public class KarrierePage {
         ReusableMethods.clickElement(karriereCard);
         log.info("Auf die Karriere-Karte '{}' wurde geklickt.", cardName);
     }
-
 
 
     public void handleCookieBanner(String cookieOption) {
@@ -100,17 +94,13 @@ public class KarrierePage {
         log.info("Auf 'Aktualisieren' wurde geklickt.");
     }
 
+
     public void selectFilteredPosition(String position) {
-        ReusableMethods.waitForElementToBePrecense(driver, filteredPositions, 10);
-        List<WebElement>jobs = new ArrayList<>(driver.findElements(filteredPositions));
-        for (int i = 0; i < jobs.size(); i++) {
-            String jobName = ReusableMethods.getTextOfElement(jobs.get(i));
-            if(jobName.contains(position)){
-                jobs.get(i).click();
-                log.info("Die gefilterte Position '{}' wurde ausgewählt.", position);
-                break;
-            }
-        }
+
+        By locator = By.xpath("//*[contains(.,'" + position + "')]");
+        ReusableMethods.waitForElementToBeClickable(driver, locator, 10);
+        driver.findElement(locator).click();
+        log.info("Die gefilterte Position '{}' wurde ausgewählt.", position);
     }
 
     public void clickJetztBewerben(){
@@ -118,7 +108,6 @@ public class KarrierePage {
         ReusableMethods.clickElement(jetztBewerben);
         log.info("Auf 'Jetzt bewerben!' wurde geklickt.");
     }
-
 
     }
 
