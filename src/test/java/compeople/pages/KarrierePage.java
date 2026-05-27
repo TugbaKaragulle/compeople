@@ -101,6 +101,7 @@ public class KarrierePage {
     }
 
     public void selectFilteredPosition(String position) {
+        ReusableMethods.waitForElementToBePrecense(driver, filteredPositions, 10);
         List<WebElement>jobs = new ArrayList<>(driver.findElements(filteredPositions));
         for (int i = 0; i < jobs.size(); i++) {
             String jobName = ReusableMethods.getTextOfElement(jobs.get(i));

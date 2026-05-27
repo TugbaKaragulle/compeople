@@ -13,25 +13,25 @@ public class HomePage {
     private WebDriver driver = Driver.getDriver();
     private static final Logger log = LogManager.getLogger(HomePage.class);
 
-    private By karriere = By.xpath("//a[@href='https://www.compeople.de/karriere/']");
+   // private By karriere = By.xpath("//a[@href='https://www.compeople.de/karriere/']");
 
 
     // ---------------- METHODS ----------------
 
-//    public void clickHeaderMenu(String menuName) {
-//        By headerMenuLocator = By.xpath("//ul[contains(@id, 'menu-1')]//a[normalize-space()='" + menuName + "']");
-//        ReusableMethods.waitForElementToBeClickable(driver, headerMenuLocator, 10);
-//        JavascriptUtils.clickElementByJS(headerMenuLocator);
-////        ReusableMethods.clickElement(headerMenuLocator);
-//        log.info("Im Header-Menü wurde auf '{}' geklickt.", menuName);
-//    }
-
-    public void clickHeaderMenu() {
-
-        ReusableMethods.waitForElementToBePrecense(driver, karriere, 10);
-        JavascriptUtils.clickElementByJS(karriere);
+    public void clickHeaderMenu(String menuName) {
+        By headerMenuLocator = By.xpath("//ul[contains(@id, 'menu-1')]//a[normalize-space()='" + menuName + "']");
+        ReusableMethods.waitForElementToBePrecense(driver, headerMenuLocator, 10);
+        JavascriptUtils.clickElementByJS(headerMenuLocator);
 //        ReusableMethods.clickElement(headerMenuLocator);
-        log.info("Im Header-Menü wurde auf geklickt.");
+        log.info("Im Header-Menü wurde auf '{}' geklickt.", menuName);
     }
+
+//    public void clickHeaderMenu() {
+//
+//        ReusableMethods.waitForElementToBePrecense(driver, karriere, 10);
+//        JavascriptUtils.clickElementByJS(karriere);
+////        ReusableMethods.clickElement(headerMenuLocator);
+//        log.info("Im Header-Menü wurde auf geklickt.");
+//    }
 
 }

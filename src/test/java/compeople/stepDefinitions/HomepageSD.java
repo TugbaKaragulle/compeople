@@ -10,6 +10,6 @@ public class HomepageSD {
 
     @When("Der Benutzer klickt auf {string} im Header")
     public void der_benutzer_klickt_auf_im_header(String menuName) {
-        allPages.getHomepage().clickHeaderMenu();
+        allPages.getHomepage().clickHeaderMenu(menuName);
     }
 }
