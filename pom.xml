@@ -93,7 +93,7 @@
                     <reuseForks>false</reuseForks>
                     <useFile>false</useFile>
                     <includes>
-                        <include>runners/Runner.java</include>
+                        <include>Runner.java</include>
                     </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
