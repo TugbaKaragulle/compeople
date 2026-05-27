@@ -28,7 +28,7 @@ public class HomePage {
 
     public void clickHeaderMenu() {
 
-        ReusableMethods.waitForElementToBeClickable(driver, karriere, 10);
+        ReusableMethods.waitForElementToBePrecense(driver, karriere, 10);
         JavascriptUtils.clickElementByJS(karriere);
 //        ReusableMethods.clickElement(headerMenuLocator);
         log.info("Im Header-Menü wurde auf geklickt.");
