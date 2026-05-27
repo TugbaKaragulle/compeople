@@ -26,7 +26,10 @@ public class Driver {
             switch (browser) {
 
                 case "chrome":
-                    driver = new ChromeDriver();
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--start-maximized"); // Ekranı kapla
+                    options.addArguments("--window-size=1920,1080"); // Çözünürlüğü sabitle (Jenkins için)
+                    driver = new ChromeDriver(options);
                     break;
                 case "firefox":
                     driver = new FirefoxDriver();
@@ -38,7 +41,10 @@ public class Driver {
                     driver = new ChromeDriver(new ChromeOptions().addArguments("--headless=new"));
                     break;
                 default:
-                    driver = new ChromeDriver();
+                    ChromeOptions defaultOptions = new ChromeOptions();
+                    defaultOptions.addArguments("--start-maximized");
+                    defaultOptions.addArguments("--window-size=1920,1080");
+                    driver = new ChromeDriver(defaultOptions);
 
             }
 
