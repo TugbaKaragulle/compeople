@@ -13,7 +13,7 @@ public class HomePage {
     private WebDriver driver = Driver.getDriver();
     private static final Logger log = LogManager.getLogger(HomePage.class);
 
-    private By karriere = By.xpath("(//a[@class='elementor-item'][normalize-space()='Karriere'])[1]");
+    private By karriere = By.xpath("//a[@href='https://www.compeople.de/karriere/']");
 
 
     // ---------------- METHODS ----------------
