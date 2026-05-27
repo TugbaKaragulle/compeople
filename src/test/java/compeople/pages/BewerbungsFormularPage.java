@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import java.util.Locale;
 
 public class BewerbungsFormularPage {
@@ -184,11 +183,6 @@ public class BewerbungsFormularPage {
         return false;
     }
 }
-
-
-
-
-
 
 
 

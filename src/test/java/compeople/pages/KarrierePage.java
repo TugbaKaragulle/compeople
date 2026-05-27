@@ -21,8 +21,7 @@ public class KarrierePage {
     private By unternehmensBereich = By.xpath("//span[normalize-space()='Unternehmensbereich']");
     private By karrierelevel = By.xpath("//span[normalize-space()='Karrierelevel']");
     private By aktualisieren = By.xpath("//a[normalize-space()='Aktualisieren']");
-    private By stichwortInput = By.xpath("//input[@class='ac_input']");
-    private By filteredPositions = By.xpath("//div[@class='joboffer_title_text joboffer_box']");
+    private By stichwortInput = By.xpath("//input[@class='ac_input']");;
 
     // ---------------- METHODS ----------------
 
@@ -93,7 +92,6 @@ public class KarrierePage {
         actions.moveToElement(driver.findElement(aktualisieren)).click().perform();
         log.info("Auf 'Aktualisieren' wurde geklickt.");
     }
-
 
     public void selectFilteredPosition(String position) {
 
