@@ -31,17 +31,11 @@ public class KarrierePage {
 
     // ---------------- METHODS ----------------
 
-//    public void clickKarriereCard(String cardName) {
-//        By karriereCard = By.xpath("//div[normalize-space()='" + cardName + "']/ancestor::a");
-//        ReusableMethods.waitForElementToBeClickable(driver, karriereCard, 10);
-//        ReusableMethods.clickElement(karriereCard);
-//        log.info("Auf die Karriere-Karte '{}' wurde geklickt.", cardName);
-//    }
-
-    public void clickKarriereCard() {
-        ReusableMethods.waitForElementToBeClickable(driver, karriere, 10);
-        JavascriptUtils.clickElementByJS(karriere);
-        log.info("Auf die Karriere-Karte wurde geklickt.");
+    public void clickKarriereCard(String cardName) {
+        By karriereCard = By.xpath("//div[normalize-space()='" + cardName + "']/ancestor::a");
+        ReusableMethods.waitForElementToBeClickable(driver, karriereCard, 10);
+        ReusableMethods.clickElement(karriereCard);
+        log.info("Auf die Karriere-Karte '{}' wurde geklickt.", cardName);
     }
 
 
