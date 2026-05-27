@@ -19,8 +19,7 @@ public class HomePage {
     public void clickHeaderMenu(String menuName) {
         By headerMenuLocator = By.xpath("//ul[contains(@id, 'menu-1')]//a[normalize-space()='" + menuName + "']");
         ReusableMethods.waitForElementToBePrecense(driver, headerMenuLocator, 10);
-        //JavascriptUtils.clickElementByJS(headerMenuLocator);
-        ReusableMethods.clickElement(headerMenuLocator);
+        JavascriptUtils.clickElementByJS(headerMenuLocator);
         log.info("Im Header-Menü wurde auf '{}' geklickt.", menuName);
     }
 
