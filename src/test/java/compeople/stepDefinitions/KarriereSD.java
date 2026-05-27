@@ -10,7 +10,7 @@ public class KarriereSD {
 
     @When("klickt auf der geöffneten Seite auf {string}")
     public void der_benutzer_klickt_auf_der_geöffneten_seite_auf(String cardName) {
-        allPages.getKarriere().clickKarriereCard(cardName);
+        allPages.getKarriere().clickKarriereCard();
     }
 
     @And("klickt auf {string} im Cookie-Banner")

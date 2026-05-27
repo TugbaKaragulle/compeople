@@ -21,6 +21,7 @@ public class KarrierePage {
 
     // ---------------- LOCATORS ----------------
 
+    private By karriere = By.xpath("(//a[@class='elementor-item'][normalize-space()='Karriere'])[1]");
     private By jetztBewerben = By.xpath("//a[text()='Jetzt bewerben!']");
     private By unternehmensBereich = By.xpath("//span[normalize-space()='Unternehmensbereich']");
     private By karrierelevel = By.xpath("//span[normalize-space()='Karrierelevel']");
@@ -30,12 +31,20 @@ public class KarrierePage {
 
     // ---------------- METHODS ----------------
 
-    public void clickKarriereCard(String cardName) {
-        By karriereCard = By.xpath("//div[normalize-space()='" + cardName + "']/ancestor::a");
-        ReusableMethods.waitForElementToBeClickable(driver, karriereCard, 10);
-        ReusableMethods.clickElement(karriereCard);
-        log.info("Auf die Karriere-Karte '{}' wurde geklickt.", cardName);
+//    public void clickKarriereCard(String cardName) {
+//        By karriereCard = By.xpath("//div[normalize-space()='" + cardName + "']/ancestor::a");
+//        ReusableMethods.waitForElementToBeClickable(driver, karriereCard, 10);
+//        ReusableMethods.clickElement(karriereCard);
+//        log.info("Auf die Karriere-Karte '{}' wurde geklickt.", cardName);
+//    }
+
+    public void clickKarriereCard() {
+        ReusableMethods.waitForElementToBeClickable(driver, karriere, 10);
+        JavascriptUtils.clickElementByJS(karriere);
+        log.info("Auf die Karriere-Karte wurde geklickt.");
     }
+
+
 
     public void handleCookieBanner(String cookieOption) {
         By cookie = By.xpath("//a[@aria-label='" + cookieOption + "']");
