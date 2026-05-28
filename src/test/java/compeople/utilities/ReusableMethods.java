@@ -28,9 +28,6 @@ public class ReusableMethods {
         return wait.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(by)));
     }
 
-    public static void clickElementByJS(By by) {
-        JavascriptUtils.clickElementByJS(by);
-    }
 
     // SENDKEYS METHODS------------------------------------------------------------------------------------------------------
     public static void sendKeys(By by, String data) {
@@ -43,7 +40,7 @@ public class ReusableMethods {
         return Driver.getDriver().findElement(by).isDisplayed();
     }
 
-    public static WebElement    visibilityOfElement(By by){
+    public static WebElement  visibilityOfElement(By by){
         return Driver.getDriver().findElement(by);
     }
     public static List<WebElement>    visibilityOfElements(By by){
@@ -91,11 +88,6 @@ public class ReusableMethods {
     //GET TEXT OF ELEMENT     * Returns trimmed text of a WebElement.
     public static String getTextOfElement(WebElement element) {
         return element.getText().trim();
-    }
-
-    public static String getTextOfElementByJS(By by) {
-        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-        return (String) js.executeScript("return arguments[0].innerText;", Driver.getDriver().findElement(by));
     }
 
     //CONVERT ELEMENT TEXT INTO INTEGER    * Extracts and returns an integer from a WebElement's text.  * (e.g. "$1,234" → 1234)

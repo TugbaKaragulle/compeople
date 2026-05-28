@@ -85,4 +85,9 @@ public class JavascriptUtils {
         js.executeScript("arguments[0].setAttribute('style', 'border: none;');", element);
     }
 
+    public static String getTextOfElementByJS(By by) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        return (String) js.executeScript("return arguments[0].innerText;", Driver.getDriver().findElement(by));
+    }
+
 }

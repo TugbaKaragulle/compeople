@@ -6,20 +6,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.time.Duration;
 
 public class Driver {
 
     //Singleton driver class
     private static WebDriver driver;
-    public static ThreadLocal<String> browserThread = new ThreadLocal<>();
+    //public static ThreadLocal<String> browserThread = new ThreadLocal<>();
 
     private Driver() {
-    }// new keyword'u ile bu classtan obje oluşturulmasının önüne geçilir.
+    }
 
     public static WebDriver getDriver() {
 
-        if (driver == null) {//Driver daha önce oluşturulmamış ise
+        if (driver == null) {
 
             String browser = ConfigReader.getProperty("browser");
 
@@ -43,18 +42,18 @@ public class Driver {
             }
 
         }
-        // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
         driver.manage().window().maximize();
 
         return driver;
     }
 
-    public static void setBrowser(String browserName) {
-        browserThread.set(browserName);
-    }
+//    public static void setBrowser(String browserName) {
+//        browserThread.set(browserName);
+//    }
 
     public static void closeDriver() {
-        if (driver != null) {//Driver daha önce kapatılmamışsa
+        if (driver != null) {
 
             try {
                 Thread.sleep(3000);
@@ -63,7 +62,7 @@ public class Driver {
             }
 
             driver.quit();
-            driver = null;//Kapanan drivera null ataması yaparak getDriver methodu ile tekrar çağrılabilmesini sağlıyoruz
+            driver = null;
         }
     }
 }
