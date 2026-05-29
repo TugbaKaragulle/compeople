@@ -28,7 +28,6 @@ public class ReusableMethods {
         return wait.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(by)));
     }
 
-
     // SENDKEYS METHODS------------------------------------------------------------------------------------------------------
     public static void sendKeys(By by, String data) {
         Driver.getDriver().findElement(by).sendKeys(data);
@@ -75,7 +74,6 @@ public class ReusableMethods {
         }
     }
 //URL CONTAINS METHOD       * Waits for the current URL to contain the given string.
-
     public static boolean urlContainsByWebDriverWait(String data) {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         try {
@@ -132,9 +130,8 @@ public class ReusableMethods {
             return false;
         }
     }
-    /**
-     * Waits for the page title to contain the given string.
-     */
+
+    //Waits for the page title to contain the given string.
     public static boolean waitForVisibilityOfTitle(String string) {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.titleContains(string));

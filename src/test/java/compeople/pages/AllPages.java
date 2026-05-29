@@ -2,6 +2,7 @@ package compeople.pages;
 
 public class AllPages {
 
+    //Pages
     private HomePage homepage;
     private KarrierePage karriere;
     private BewerbungsFormularPage bewerbungsFormularPage;
