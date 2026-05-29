@@ -11,7 +11,7 @@ public class Driver {
 
     //Singleton driver class
     private static WebDriver driver;
-    //public static ThreadLocal<String> browserThread = new ThreadLocal<>();
+
 
     private Driver() {
     }
@@ -48,9 +48,6 @@ public class Driver {
         return driver;
     }
 
-//    public static void setBrowser(String browserName) {
-//        browserThread.set(browserName);
-//    }
 
     public static void closeDriver() {
         if (driver != null) {

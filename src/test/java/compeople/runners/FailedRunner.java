@@ -12,4 +12,5 @@ import io.cucumber.testng.CucumberOptions;
                 "pretty"}
 )
 public class FailedRunner extends AbstractTestNGCucumberTests {
+
 }
