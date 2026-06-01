@@ -1,11 +1,6 @@
 package compeople.utilities;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-
 import static compeople.utilities.Driver.getDriver;
 
 public class JavascriptUtils {
@@ -29,16 +24,6 @@ public class JavascriptUtils {
         }
     }
 
-    public static void scrollToVisibleElement(WebDriver driver, By by) {
-        WebElement element = getDriver().findElement(by);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(element));
-
-        // Scroll smoothly to the element
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});",
-                element);
-    }
 
     public static void seiteLangsamNachUntenScrollen(WebDriver driver, int schritte) {
 
@@ -67,27 +52,5 @@ public class JavascriptUtils {
         ReusableMethods.waitForSeconds(1);
     }
 
-    // Kann als sicherer Fallback verwendet werden, wenn Actions.moveToElement() im Headless-Modus oder bei Hover-Problemen nicht funktioniert.
-    public static void mouseOverByJS(By by) {
-        WebElement element = getDriver().findElement(by);
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        String mouseOverScript =
-                "var evObj = document.createEvent('MouseEvents');" +
-                        "evObj.initMouseEvent('mouseover', true, true, window, 1, 0,0,0,0, false,false,false,false,0,null);" +
-                        "arguments[0].dispatchEvent(evObj);";
-        js.executeScript(mouseOverScript, element);
-    }
-
-    public static void highlightElement(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-        js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
-        try { Thread.sleep(500); } catch (InterruptedException e) {}
-        js.executeScript("arguments[0].setAttribute('style', 'border: none;');", element);
-    }
-
-    public static String getTextOfElementByJS(By by) {
-        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-        return (String) js.executeScript("return arguments[0].innerText;", Driver.getDriver().findElement(by));
-    }
 
 }
