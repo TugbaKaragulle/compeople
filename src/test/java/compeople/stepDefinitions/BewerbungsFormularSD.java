@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class BewerbungsFormulaSD {
+public class BewerbungsFormularSD {
 
 
     AllPages allPages = new AllPages();
